@@ -23,10 +23,6 @@ module Reddit
       "<Reddit::Api user='#{user}'>"
     end
 
-    def user_agent
-      "Ruby Reddit Client v0.0.1"
-    end
-
     def logged_in?
       !!cookie
     end
@@ -34,22 +30,6 @@ module Reddit
     def browse(subreddit, options={})
       subreddit = sanitize_subreddit(subreddit)
       read("/r/#{subreddit}.json", options )
-    end
-
-    # TODO Move voting to separate class
-    def vote(direction, submission_id)
-      return false unless logged_in?
-      up_or_down = direction == :up ? 1 : -1
-      url        = action_mapping["vote"]["path"]
-      self.class.post( url, {:body => {:id => submission_id, :dir => up_or_down, :uh => modhash}, :headers => base_headers, :debug_output => @debug} )
-    end
-
-    def upvote(submission)
-      vote(:up, submission.id)
-    end
-
-    def downvote(submission)
-      vote(:down, submission.id)
     end
 
     def read(url, options={})
@@ -107,6 +87,10 @@ module Reddit
 
     def base_headers
       {'Cookie' => cookie.to_s, 'user-agent' => user_agent}
+    end
+
+    def user_agent
+      "Ruby Reddit Client v0.0.1"
     end
   end
 end
