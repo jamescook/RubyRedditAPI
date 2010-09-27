@@ -29,6 +29,7 @@ module Reddit
 
     def browse(subreddit, options={})
       subreddit = sanitize_subreddit(subreddit)
+      options.merge! :handler => "Submission"
       read("/r/#{subreddit}.json", options )
     end
 
@@ -38,7 +39,8 @@ module Reddit
         resp = self.class.send( (options[:verb] || "get"), url, {:query => (options[:query] || {}), :headers => base_headers, :debug_output => @debug})
         if valid_response?(resp)
           @last_action = Time.now
-          resp = Reddit::Submission.parse( self, JSON.parse(resp.body) )
+          klass = Reddit.const_get(options[:handler] || "Submission")
+          resp  = klass.parse( self, JSON.parse(resp.body) )
           return resp
         end
       end
@@ -78,10 +80,10 @@ module Reddit
         "unsave"      =>  {"path" => "/api/unsave",    "verb" => "POST"},
         "comment"     =>  {"path" => "/api/comment",   "verb" => "POST"},
         "subscribe"   =>  {"path" => "/api/subscribe", "verb" => "POST" },
-        "comments"    =>  {"path" => "/comments",      "verb" => "GET" },
+        "comments"    =>  {"path" => "/comments",      "verb" => "GET", "handler" => "Comment" },
         "my_reddits"  =>  {"path" => "/reddits/mine",  "verb" => "GET" },
-        "saved"       =>  {"path" => "saved",          "verb" => "GET"},
-        ""            =>  {"path" => "",               "verb" => "GET"}
+        "saved"       =>  {"path" => "saved",          "verb" => "GET", "handler" => "Submission"},
+        ""            =>  {"path" => "",               "verb" => "GET", "handler" => "Submission"}
       }
     end
 

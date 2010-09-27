@@ -32,7 +32,7 @@ module Reddit
     end
 
     def comments
-      #TODO
+      session.read( permalink + ".json", {:handler => "Comment"} )
     end
 
     def parse(json)
