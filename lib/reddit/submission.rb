@@ -22,13 +22,11 @@ module Reddit
     end
 
     def upvote
-      vote = Reddit::Vote.new(self)
-      vote.up
+      Reddit::Vote.new(self).up
     end
 
     def downvote
-      vote = Reddit::Vote.new(self)
-      vote.down
+      Reddit::Vote.new(self).down
     end
 
     def comments

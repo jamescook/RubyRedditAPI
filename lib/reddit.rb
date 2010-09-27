@@ -2,7 +2,9 @@ $LOAD_PATH.unshift File.dirname(__FILE__)
 
 require "httparty"
 require "json"
+require "reddit/vote"
 require "reddit/submission"
+require "reddit/comment"
 
 module Reddit
 
@@ -52,6 +54,10 @@ module Reddit
       logged_in?
     end
 
+    def base_headers
+      {'Cookie' => cookie.to_s, 'user-agent' => user_agent}
+    end
+
     protected
     def valid_response?(response)
       response.code == 200
@@ -85,10 +91,6 @@ module Reddit
         "saved"       =>  {"path" => "saved",          "verb" => "GET", "handler" => "Submission"},
         ""            =>  {"path" => "",               "verb" => "GET", "handler" => "Submission"}
       }
-    end
-
-    def base_headers
-      {'Cookie' => cookie.to_s, 'user-agent' => user_agent}
     end
 
     def user_agent
