@@ -1,9 +1,8 @@
 module Reddit
-  class Submission
-    attr_reader :session, :domain, :media_embed, :subreddit, :selftext_html, :selftext, :likes, :saved, :clicked, :author, :media, :score, :over_18, :hidden, :thumbnail, :subreddit_id, :downs, :is_self, :permalink, :name, :created, :url, :title, :created_utc, :num_comments, :ups
+  class Submission < Base
+    attr_reader :domain, :media_embed, :subreddit, :selftext_html, :selftext, :likes, :saved, :clicked, :author, :media, :score, :over_18, :hidden, :thumbnail, :subreddit_id, :downs, :is_self, :permalink, :name, :created, :url, :title, :created_utc, :num_comments, :ups
 
-    def initialize(session,data)
-      @session = session
+    def initialize(data)
       json = data
       parse(json)
     end
@@ -30,7 +29,7 @@ module Reddit
     end
 
     def comments
-      session.read( permalink + ".json", {:handler => "Comment"} )
+      read( permalink + ".json", {:handler => "Comment"} )
     end
 
     def parse(json)
@@ -40,14 +39,14 @@ module Reddit
     end
 
     class << self
-      def parse(session,json)
+      def parse(json)
         submissions = []
         data            = json["data"]
-        session.modhash = data["modhash"] # Needed for api calls
+        modhash = data["modhash"] # Needed for api calls
         children        = data["children"]
         children.each do |child|
           data = child["data"]
-          submissions << Reddit::Submission.new(session,data)
+          submissions << Reddit::Submission.new(data)
         end
         submissions
       end
