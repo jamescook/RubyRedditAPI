@@ -1,0 +1,24 @@
+Ruby Reddit Client
+==================
+'Tested' with 1.9.2
+
+Usage:
+=======
+> require "lib/reddit.rb"
+> r = Reddit::Api.new "user", "password"
+> results = r.browse "ruby"
+> results[0].upvote
+ 
+Features:
+========
+- Authentication
+- Parse submissions
+- Vote on submission
+
+
+TODO
+===========
+- Tests using the VM ( test first derp )
+- Comments parsing
+- User parseing 
+- Everything else...
