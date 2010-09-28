@@ -2,9 +2,9 @@ module Reddit
   class Base
     include HTTParty
 
-    attr_reader :last_action, :debug, :cookie
-    attr_accessor :modhash
+    attr_reader :last_action, :debug
     base_uri "www.reddit.com"
+    class << self; attr_reader :cookie, :modhash; end
 
     def initialize(user,password, options={})
       @user     = user
@@ -23,7 +23,11 @@ module Reddit
     end
 
     def cookie
-      @@cookie
+      Reddit::Base.cookie
+    end
+
+    def modhash
+      Reddit::Base.modhash
     end
 
     def base_headers
@@ -41,7 +45,7 @@ module Reddit
 
     def capture_session(response)
       cookies = response.headers["set-cookie"]
-      @@cookie = cookies
+      Reddit::Base.instance_variable_set("@cookie", cookies)
     end
 
     def throttled?

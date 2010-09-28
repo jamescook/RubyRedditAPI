@@ -2,7 +2,6 @@ module Reddit
 
   class Api < Base
     attr_reader :user, :password, :last_action, :debug
-    attr_accessor :modhash
 
     def initialize(user,password, options={})
       @user     = user

@@ -42,7 +42,7 @@ module Reddit
       def parse(json)
         submissions = []
         data            = json["data"]
-        modhash = data["modhash"] # Needed for api calls
+        Reddit::Base.instance_variable_set("@modhash", data["modhash"]) # Needed for api calls
         children        = data["children"]
         children.each do |child|
           data = child["data"]
