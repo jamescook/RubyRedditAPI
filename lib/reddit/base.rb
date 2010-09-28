@@ -22,6 +22,10 @@ module Reddit
       logged_in?
     end
 
+    def logout
+      Reddit::Base.instance_variable_set("@cookie",nil)
+    end
+
     def cookie
       Reddit::Base.cookie
     end
@@ -34,13 +38,13 @@ module Reddit
       {'Cookie' => cookie.to_s, 'user-agent' => user_agent}
     end
 
+    def logged_in?
+      !!(cookie && (cookie =~ /reddit_session/) != nil)
+    end
+
     protected
     def valid_response?(response)
       response.code == 200 && response.headers["content-type"].to_s =~ /json/
-    end
-
-    def logged_in?
-      !!cookie
     end
 
     def capture_session(response)

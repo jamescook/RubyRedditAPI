@@ -1,9 +1,9 @@
 module Reddit
-  class Comment
-    attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :replies, :subreddit, :ups, :session
-    def initialize(session, json)
-      @session = session
+  class Comment < Api
+    attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :replies, :subreddit, :ups, :debug, :kind
+    def initialize(json)
       parse(json)
+      @debug = StringIO.new
     end
 
     def inspect
@@ -11,7 +11,11 @@ module Reddit
     end
 
     def id
-      "t1_#{@id}"
+      "#{kind}_#{@id}"
+    end
+
+    def to_s
+      body
     end
 
     def upvote
@@ -38,15 +42,16 @@ module Reddit
     end
 
     class << self
-      def parse(session, json)
+      def parse(json)
         comments = []
         details, results = json # TODO figure out this array dealio. First is submission detail?
         data = results["data"]
-        session.modhash = data["modhash"] # Needed for api calls
+        modhash = data["modhash"] # Needed for api calls
         children        = data["children"]
         children.each do |child|
-          data = child["data"]
-          comments << Reddit::Comment.new(session,data)
+          @kind = child["kind"] if @kind.nil?
+          data["kind"] = child["kind"]
+          comments << Reddit::Comment.new(data)
         end
         comments
       end

@@ -1,0 +1,5 @@
+server:
+  address: "reddit.local"
+  port: 80
+  test_user: "reddit"
+  test_pass: "password"

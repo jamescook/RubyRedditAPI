@@ -1,10 +1,11 @@
 module Reddit
-  class Submission < Base
-    attr_reader :domain, :media_embed, :subreddit, :selftext_html, :selftext, :likes, :saved, :clicked, :author, :media, :score, :over_18, :hidden, :thumbnail, :subreddit_id, :downs, :is_self, :permalink, :name, :created, :url, :title, :created_utc, :num_comments, :ups
+  class Submission < Api
+    attr_reader :domain, :media_embed, :subreddit, :selftext_html, :selftext, :likes, :saved, :clicked, :author, :media, :score, :over_18, :hidden, :thumbnail, :subreddit_id, :downs, :is_self, :permalink, :name, :created, :url, :title, :created_utc, :num_comments, :ups, :kind
 
     def initialize(data)
       json = data
       parse(json)
+      @debug    = StringIO.new
     end
 
     def inspect
@@ -13,11 +14,22 @@ module Reddit
 
     def id
       #TODO Don't hardcode t3, it's in the JSON
-      "t3_#{@id}"
+      "#{kind}_#{@id}"
     end
 
     def reload
       #TODO
+    end
+
+    #thing_id:t6_2f
+    #text:THIS IS A COMMENT
+    #r:reddit_test0  # subreddit
+    #uh:reddit  #modhash?
+    def add_comment(text)
+      self.class.post("/api/comment", {:body => {:thing_id => id, :text => text, :uh => modhash, :r => subreddit }, :headers => base_headers, :debug_output => @debug })
+    end
+
+    def delete_comment(id)
     end
 
     def upvote
@@ -46,6 +58,7 @@ module Reddit
         children        = data["children"]
         children.each do |child|
           data = child["data"]
+          data["kind"] = child["kind"]
           submissions << Reddit::Submission.new(data)
         end
         submissions

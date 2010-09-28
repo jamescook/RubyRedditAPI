@@ -26,9 +26,10 @@ module Reddit
         if valid_response?(resp)
           @last_action = Time.now
           klass = Reddit.const_get(options[:handler] || "Submission")
-          resp  = klass.parse( JSON.parse(resp.body) )
+          resp  = klass.parse( JSON.parse(resp.body, :max_nesting => 9_999) )
           return resp
         else
+          puts resp.code
           return false
         end
       end
