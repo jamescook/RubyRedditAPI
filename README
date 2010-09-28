@@ -13,16 +13,15 @@ Features:
 ========
 - Authentication
 - Parse submissions
+- Comments parsing
 - Vote on submission
 
 
-TODO
-===========
-- Tests using the VM ( test first derp )
-- Comments parsing
-- User parseing 
-- Everything else...
-
+Running Tests:
+=============
+- Set up the reddit VM (http://blog.reddit.com/2010/05/admins-never-do-what-you-want-now-it-is.html)
+- Ensure your hosts file has reddit.local pointing to the VM
+- rake cucumber
 
 License
 (The MIT License)

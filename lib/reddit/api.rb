@@ -28,6 +28,8 @@ module Reddit
           klass = Reddit.const_get(options[:handler] || "Submission")
           resp  = klass.parse( JSON.parse(resp.body) )
           return resp
+        else
+          return false
         end
       end
     end

@@ -36,7 +36,7 @@ module Reddit
 
     protected
     def valid_response?(response)
-      response.code == 200
+      response.code == 200 && response.headers["content-type"].to_s =~ /json/
     end
 
     def logged_in?
@@ -53,7 +53,7 @@ module Reddit
     end
 
     def sanitize_subreddit(subreddit)
-      subreddit.gsub!(/^\/?r\/?/,'')
+      subreddit.gsub!(/^\/?r\//,'')
       subreddit.gsub!(/\.json\Z/,'')
       subreddit
     end
