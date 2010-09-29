@@ -18,6 +18,21 @@ module Reddit
       body
     end
 
+    def hide # soft delete?
+      resp=self.class.post("/api/del", {:body => {:id => id, :uh => modhash, :r => subreddit, :executed => "removed" }, :headers => base_headers, :debug_output => @debug })
+      resp.code == 200
+    end
+
+    def remove
+      resp=self.class.post("/api/remove", {:body => {:id => id, :uh => modhash, :r => subreddit}, :headers => base_headers, :debug_output => @debug })
+      resp.code == 200
+    end
+
+    def approve
+      resp=self.class.post("/api/approve", {:body => {:id => id, :uh => modhash, :r => subreddit}, :headers => base_headers, :debug_output => @debug })
+      resp.code == 200
+    end
+
     def upvote
       Vote.new(self).up
     end
@@ -49,8 +64,9 @@ module Reddit
         modhash = data["modhash"] # Needed for api calls
         children        = data["children"]
         children.each do |child|
-          @kind = child["kind"] if @kind.nil?
-          data["kind"] = child["kind"]
+          kind = child["kind"]
+          data = child["data"]
+          data["kind"] = kind
           comments << Reddit::Comment.new(data)
         end
         comments

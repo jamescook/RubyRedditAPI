@@ -1,6 +1,3 @@
-Before do
-end
-
 Given /^I have a submission$/ do
   load_server_config
   Reddit::Api.base_uri @address
@@ -57,4 +54,8 @@ end
 Then /^I should be able to see the comments$/ do
   comments = @submission.comments
   comments.size.should > 0
+end
+
+Then /^I should be able to post a comment$/ do
+  @submission.add_comment("TEST COMMENT").should be true
 end

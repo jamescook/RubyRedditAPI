@@ -21,15 +21,9 @@ module Reddit
       #TODO
     end
 
-    #thing_id:t6_2f
-    #text:THIS IS A COMMENT
-    #r:reddit_test0  # subreddit
-    #uh:reddit  #modhash?
     def add_comment(text)
-      self.class.post("/api/comment", {:body => {:thing_id => id, :text => text, :uh => modhash, :r => subreddit }, :headers => base_headers, :debug_output => @debug })
-    end
-
-    def delete_comment(id)
+      resp = self.class.post("/api/comment", {:body => {:thing_id => id, :text => text, :uh => modhash, :r => subreddit }, :headers => base_headers, :debug_output => @debug })
+      resp.code == 200
     end
 
     def upvote
