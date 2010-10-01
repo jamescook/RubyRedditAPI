@@ -65,6 +65,7 @@ module Reddit
         children        = data["children"]
         children.each do |child|
           kind = child["kind"]
+          next if kind =~ /more/
           data = child["data"]
           data["kind"] = kind
           comments << Reddit::Comment.new(data)

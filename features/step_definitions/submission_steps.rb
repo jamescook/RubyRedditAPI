@@ -56,6 +56,47 @@ Then /^I should be able to see the comments$/ do
   comments.size.should > 0
 end
 
-Then /^I should be able to post a comment$/ do
-  @submission.add_comment("TEST COMMENT").should be true
+Then /^I should not be able to save the submission$/ do
+  @submission.save.should be false
 end
+
+Then /^I should not be able to unsave the submission$/ do
+  @submission.unsave.should be false
+end
+
+Then /^I should not be able to hide the submission$/ do
+  @submission.hide.should be false
+end
+
+Then /^I should not be able to unhide the submission$/ do
+  @submission.unhide.should be false
+end
+
+Then /^I should be able to save the submission$/ do
+  @submission.save.should be true
+end
+
+Then /^I should be able to unsave the submission$/ do
+  @submission.unsave.should be true
+end
+
+Then /^I should be able to hide the submission$/ do
+  @submission.hide.should be true
+end
+
+Then /^I should be able to unhide the submission$/ do
+  @submission.unhide.should be true
+end
+
+Then /^I should be able to report the submission$/ do
+  @submission.report.should be true
+end
+
+Then /^I should not be able to report the submission$/ do
+  @submission.report.should be false
+end
+
+Then /^I should be able to see more comments if needed$/ do
+  pending
+end
+

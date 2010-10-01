@@ -22,14 +22,15 @@ module Reddit
     def read(url, options={})
       unless throttled?
         @debug.rewind
-        resp = self.class.send( (options[:verb] || "get"), url, {:query => (options[:query] || {}), :headers => base_headers, :debug_output => @debug})
+        verb = (options[:verb] || "get")
+        param_key = (verb == "get") ? :query : :body
+        resp = self.class.send( verb, url, {param_key => (options[param_key] || {}), :headers => base_headers, :debug_output => @debug})
         if valid_response?(resp)
           @last_action = Time.now
           klass = Reddit.const_get(options[:handler] || "Submission")
           resp  = klass.parse( JSON.parse(resp.body, :max_nesting => 9_999) )
           return resp
         else
-          puts resp.code
           return false
         end
       end

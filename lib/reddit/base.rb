@@ -34,12 +34,16 @@ module Reddit
       Reddit::Base.modhash
     end
 
-    def base_headers
-      {'Cookie' => cookie.to_s, 'user-agent' => user_agent}
-    end
-
     def logged_in?
       !!(cookie && (cookie =~ /reddit_session/) != nil)
+    end
+
+    def user_agent
+      self.class.user_agent
+    end
+
+    def base_headers
+      self.class.base_headers
     end
 
     protected
@@ -77,8 +81,15 @@ module Reddit
       }
     end
 
-    def user_agent
-      "Ruby Reddit Client v0.0.1"
+    class << self
+
+      def base_headers
+        {'Cookie' => Reddit::Base.cookie.to_s, 'user-agent' => user_agent}
+      end
+
+      def user_agent
+        "Ruby Reddit Client v0.0.1"
+      end
     end
   end
 end
