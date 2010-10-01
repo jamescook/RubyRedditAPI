@@ -5,9 +5,11 @@ Given /^I have a submission$/ do
   Reddit::Comment.base_uri @address
   @api = Reddit::Api.new @user, @pass
   @api.login
-  @submission ||= @api.browse("reddit_test0")[0]
+  @submission = @api.browse("reddit_test0")[0]
   if @api.logged_in?
-    @submission.add_comment("STOP REPOSTING!!1")
+    @submission.add_comment("STOP REPOSTING!!1") if @submission
+  else
+    raise "Can't run test. Submit failed.."
   end
 end
 
@@ -81,7 +83,9 @@ Then /^I should be able to unsave the submission$/ do
 end
 
 Then /^I should be able to hide the submission$/ do
-  @submission.hide.should be true
+  result = @submission.hide
+  @submission.unhide if result
+  result.should be true
 end
 
 Then /^I should be able to unhide the submission$/ do
@@ -100,3 +104,14 @@ Then /^I should be able to see more comments if needed$/ do
   pending
 end
 
+Then /^I should be able to moderator distinguish the submission$/ do
+  @submission.moderator_distinguish
+end
+
+Then /^I should be able to admin distinguish the submission$/ do
+  @submission.admin_distinguish
+end
+
+Then /^I should be able to indistinguish the submission$/ do
+  @submission.indistinguish
+end

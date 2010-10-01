@@ -53,6 +53,18 @@ module Reddit
       toggle :report
     end
 
+    def moderator_distinguish
+      add_distinction "yes"
+    end
+
+    def admin_distinguish
+      add_distinction "admin"
+    end
+
+    def indistinguish
+      add_distinction "no"
+    end
+
     def comments(more=false)
       #TODO Get morechildren to work correctly
       if more && last_comment_id
@@ -111,6 +123,11 @@ module Reddit
     end
 
     protected
+    def add_distinction(verb)
+      resp=self.class.post("/api/distinguish/#{verb}", {:body => {:id => id, :uh => modhash, :r => subreddit, :executed => "distinguishing..."}, :headers => base_headers, :debug_output => @debug })
+      resp.code == 200
+    end
+
     def toggle(which)
       return false unless logged_in?
       mapping = {:save => "save", :unsave => "unsave", :hide => "hidden", :unhide => "unhidden", :report => "report"}

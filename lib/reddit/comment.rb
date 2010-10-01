@@ -18,6 +18,11 @@ module Reddit
       body
     end
 
+    def edit(newtext)
+      resp=self.class.post("/api/editusertext", {:body => {:thing_id => id, :uh => modhash, :r => subreddit, :text => newtext }, :headers => base_headers, :debug_output => @debug })
+      resp.code == 200
+    end
+
     def hide # soft delete?
       resp=self.class.post("/api/del", {:body => {:id => id, :uh => modhash, :r => subreddit, :executed => "removed" }, :headers => base_headers, :debug_output => @debug })
       resp.code == 200
@@ -30,6 +35,23 @@ module Reddit
 
     def approve
       resp=self.class.post("/api/approve", {:body => {:id => id, :uh => modhash, :r => subreddit}, :headers => base_headers, :debug_output => @debug })
+      resp.code == 200
+    end
+
+    def moderator_distinguish
+      add_distinction "yes"
+    end
+
+    def admin_distinguish
+      add_distinction "admin"
+    end
+
+    def indistinguish
+      add_distinction "no"
+    end
+
+    def reply(text)
+      resp = self.class.post("/api/comment", {:body => {:thing_id => id, :text => text, :uh => modhash, :r => subreddit }, :headers => base_headers, :debug_output => @debug })
       resp.code == 200
     end
 
@@ -54,6 +76,11 @@ module Reddit
       json.keys.each do |key|
         instance_variable_set("@#{key}", json[key])
       end
+    end
+
+    def add_distinction(verb)
+      resp=self.class.post("/api/distinguish/#{verb}", {:body => {:id => id, :uh => modhash, :r => subreddit, :executed => "distinguishing..."}, :headers => base_headers, :debug_output => @debug })
+      resp.code == 200
     end
 
     class << self

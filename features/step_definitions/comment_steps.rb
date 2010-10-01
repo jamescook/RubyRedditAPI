@@ -33,4 +33,27 @@ Then /^I should be able to approve the comment$/ do
   @comment.approve
 end
 
+Then /^I should not be able to edit the comment$/ do
+  @comment.edit( "1234" ).should be false
+end
+
+Then /^I should be able to edit the comment$/ do
+  @comment.edit( "1234" ).should be true
+end
+
+Then /^I should be able to moderator distinguish the comment$/ do
+  @comment.moderator_distinguish
+end
+
+Then /^I should be able to indistinguish the comment$/ do
+  @comment.indistinguish
+end
+
+Then /^I should be able to admin distinguish the comment$/ do
+  @comment.admin_distinguish
+end
+
+Then /^I should be able to reply to the comment$/ do
+  @comment.reply("a reply").should be true
+end
 

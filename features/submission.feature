@@ -44,3 +44,15 @@ Feature: Submissions
       And I should be able to unhide the submission
       And I should be able to report the submission
       And I should be able to see more comments if needed
+
+    Scenario: I want to moderator distinguish a submission
+      Given I have a submission
+      Then I should be able to moderator distinguish the submission
+
+    Scenario: I want to admin distinguish a submission
+      Given I have a submission
+      Then I should be able to admin distinguish the submission
+
+    Scenario: I want to indistinguish a submission
+      Given I have a submission
+      Then I should be able to indistinguish the submission
