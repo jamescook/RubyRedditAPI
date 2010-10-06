@@ -8,6 +8,7 @@ require "reddit/user"
 require "reddit/vote"
 require "reddit/submission"
 require "reddit/comment"
+require "reddit/message"
 
 module Reddit
   VERSION = File.exist?("VERSION") ? File.read("VERSION").chomp : ""

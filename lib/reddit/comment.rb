@@ -7,11 +7,15 @@ module Reddit
     end
 
     def inspect
-      "<Reddit::Comment author='#{author}' body='#{short_body}'>"
+      "<Reddit::Comment author='#{@author}' body='#{short_body}'>"
     end
 
     def id
       "#{kind}_#{@id}"
+    end
+
+    def author
+      @author_data ||= read("/user/#{@author}/about.json", :handler => "User")
     end
 
     def to_s

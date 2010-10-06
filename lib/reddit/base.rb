@@ -51,6 +51,23 @@ module Reddit
       self.class.base_headers
     end
 
+    def read(url, options={})
+      unless throttled?
+        @debug.rewind
+        verb      = (options[:verb] || "get")
+        param_key = (verb == "get") ? :query : :body
+        resp      = self.class.send( verb, url, {param_key => (options[param_key] || {}), :headers => base_headers, :debug_output => @debug})
+        if valid_response?(resp)
+          @last_action = Time.now
+          klass = Reddit.const_get(options[:handler] || "Submission")
+          resp  = klass.parse( JSON.parse(resp.body, :max_nesting => 9_999) )
+          return resp
+        else
+          return false
+        end
+      end
+    end
+
     protected
     def valid_response?(response)
       response.code == 200 && response.headers["content-type"].to_s =~ /json/

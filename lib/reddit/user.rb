@@ -41,7 +41,7 @@ module Reddit
     def self.parse(json)
       kind, data = json["kind"], json["data"]
       data["kind"] = kind
-      return Reddit::User.new(data)
+      return self.new(data)
     end
   end
 end
