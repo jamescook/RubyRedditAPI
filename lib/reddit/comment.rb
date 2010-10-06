@@ -1,5 +1,6 @@
 module Reddit
   class Comment < Api
+    include JsonListing
     attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :replies, :subreddit, :ups, :debug, :kind
     def initialize(json)
       parse(json)
@@ -76,34 +77,10 @@ module Reddit
       end
     end
 
-    def parse(json)
-      json.keys.each do |key|
-        instance_variable_set("@#{key}", json[key])
-      end
-    end
-
     def add_distinction(verb)
       resp=self.class.post("/api/distinguish/#{verb}", {:body => {:id => id, :uh => modhash, :r => subreddit, :executed => "distinguishing..."}, :headers => base_headers, :debug_output => @debug })
       puts resp.headers
       resp.code == 200
-    end
-
-    class << self
-      def parse(json)
-        comments = []
-        details, results = json # TODO figure out this array dealio. First is submission detail?
-        data = results["data"]
-        modhash = data["modhash"] # Needed for api calls
-        children        = data["children"]
-        children.each do |child|
-          kind = child["kind"]
-          next if kind =~ /more/
-          data = child["data"]
-          data["kind"] = kind
-          comments << Reddit::Comment.new(data)
-        end
-        comments
-      end
     end
   end
 end
