@@ -1,11 +1,11 @@
-$LOAD_PATH.unshift File.dirname(__FILE__)
+$:.unshift File.dirname(__FILE__)
 
 module Reddit
-  VERSION = File.exist?("VERSION") ? File.read("VERSION").chomp : ""
 end
 
 require "httparty"
 require "json"
+require "reddit/version"
 require "reddit/base"
 require "reddit/json_listing"
 require "reddit/api"

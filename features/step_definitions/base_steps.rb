@@ -1,4 +1,4 @@
-require File.join( File.dirname(__FILE__), "..", "..", "lib", "reddit.rb")
+require File.join( File.dirname(__FILE__), "..", "..", "lib", "ruby_reddit_api.rb")
 Before do
   Reddit::Base.instance_variable_set("@cookie", nil)
   load_server_config
