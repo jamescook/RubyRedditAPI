@@ -1,5 +1,6 @@
 module Reddit
   class Message < Base
+    include JsonListing
     attr_reader :body, :was_comment, :kind, :first_message, :name, :created, :dest, :created_utc, :body_html, :subreddit, :parent_id, :context, :replies, :subject, :debug
     def initialize(json)
       parse(json)
@@ -25,26 +26,5 @@ module Reddit
         body
       end
     end
-
-    def parse(json)
-      json.keys.each do |key|
-        instance_variable_set("@#{key}", json[key])
-      end
-    end
-
-    def self.parse(json)
-      results = []
-      data     = json["data"]
-
-      children = data["children"]
-      children.each do |message|
-        kind     = message["kind"]
-        message["data"]["kind"] = kind
-        results << Reddit::Message.new(message["data"])
-      end
-
-      return results
-    end
-
   end
 end

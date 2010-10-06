@@ -102,7 +102,7 @@ module Reddit
       end
 
       def user_agent
-        "Ruby Reddit Client v#{VERSION}"
+        "Ruby Reddit Client v#{Reddit::VERSION}"
       end
     end
   end

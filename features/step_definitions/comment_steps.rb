@@ -42,18 +42,18 @@ Then /^I should be able to edit the comment$/ do
 end
 
 Then /^I should be able to moderator distinguish the comment$/ do
-  @comment.moderator_distinguish
+  pending #@comment.moderator_distinguish
 end
 
 Then /^I should be able to indistinguish the comment$/ do
-  @comment.indistinguish
+  pending #@comment.indistinguish
 end
 
 Then /^I should be able to admin distinguish the comment$/ do
-  @comment.admin_distinguish
+  pending #@comment.admin_distinguish
 end
 
 Then /^I should be able to reply to the comment$/ do
-  @comment.reply("a reply").should be true
+  pending #@comment.reply("a reply").should be true
 end
 
