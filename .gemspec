@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email       = ["jamecook@gmail.com"]
   s.homepage    = "http://github.com/jamescook/RubyRedditAPI"
   s.summary     = "Wrapper for reddit API"
-  s.description = "Wraps many reddit API functions such as submission and comments browsing, voting and messaging."
+  s.description = "Wraps many reddit API functions such as submission and comments browsing, voting, messaging, friending, and more."
   s.has_rdoc    = false
 
   s.required_rubygems_version = ">= 1.3.6"
