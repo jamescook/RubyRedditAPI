@@ -4,11 +4,9 @@ module Reddit
 
     attr_reader :last_action, :debug
     base_uri "www.reddit.com"
-    class << self; attr_reader :cookie, :modhash; end
+    class << self; attr_reader :cookie, :modhash, :user_id, :user, end
 
-    def initialize(user,password, options={})
-      @user     = user
-      @password = password
+    def initialize(options={})
       @debug    = StringIO.new
     end
 
@@ -17,8 +15,7 @@ module Reddit
     end
 
     def login
-      url = action_mapping["login"]["path"]
-      capture_session(self.class.post( url, {:body => {:user => user, :passwd => password}, :debug_output => @debug} ) )
+      capture_session(self.class.post( "/api/login", {:body => {:user => @user, :passwd => @password}, :debug_output => @debug} ) )
       logged_in?
     end
 
@@ -32,6 +29,14 @@ module Reddit
 
     def modhash
       Reddit::Base.modhash
+    end
+
+    def user_id
+      Reddit::Base.user_id
+    end
+
+    def user
+      Reddit::Base.user
     end
 
     def logged_in?
@@ -54,6 +59,13 @@ module Reddit
     def capture_session(response)
       cookies = response.headers["set-cookie"]
       Reddit::Base.instance_variable_set("@cookie", cookies)
+      Reddit::Base.instance_variable_set("@user",   @user)
+    end
+
+    def capture_user_id
+      return true if user_id
+      this_user = read("/user/#{user}/about.json", :handler => "User")
+      Reddit::Base.instance_variable_set("@user_id", this_user.id)
     end
 
     def throttled?
@@ -66,21 +78,6 @@ module Reddit
       subreddit
     end
 
-    def action_mapping
-      {
-        "login"       =>  {"path" => "/api/login",     "verb" => "POST"},
-        "vote"        =>  {"path" => "/api/vote",      "verb" => "POST"},
-        "save"        =>  {"path" => "/api/save",      "verb" => "POST"},
-        "unsave"      =>  {"path" => "/api/unsave",    "verb" => "POST"},
-        "comment"     =>  {"path" => "/api/comment",   "verb" => "POST"},
-        "subscribe"   =>  {"path" => "/api/subscribe", "verb" => "POST" },
-        "comments"    =>  {"path" => "/comments",      "verb" => "GET", "handler" => "Comment" },
-        "my_reddits"  =>  {"path" => "/reddits/mine",  "verb" => "GET" },
-        "saved"       =>  {"path" => "saved",          "verb" => "GET", "handler" => "Submission"},
-        ""            =>  {"path" => "",               "verb" => "GET", "handler" => "Submission"}
-      }
-    end
-
     class << self
 
       def base_headers
@@ -88,7 +85,7 @@ module Reddit
       end
 
       def user_agent
-        "Ruby Reddit Client v0.0.1"
+        "Ruby Reddit Client v#{VERSION}"
       end
     end
   end

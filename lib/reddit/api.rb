@@ -1,9 +1,9 @@
 module Reddit
 
   class Api < Base
-    attr_reader :user, :password, :last_action, :debug
+    attr_reader :last_action, :debug
 
-    def initialize(user,password, options={})
+    def initialize(user=nil,password=nil, options={})
       @user     = user
       @password = password
       @debug    = StringIO.new
@@ -16,15 +16,18 @@ module Reddit
     def browse(subreddit, options={})
       subreddit = sanitize_subreddit(subreddit)
       options.merge! :handler => "Submission"
+      if options[:limit]
+        options.merge!({:query => {:limit => options[:limit]}})
+      end
       read("/r/#{subreddit}.json", options )
     end
 
     def read(url, options={})
       unless throttled?
         @debug.rewind
-        verb = (options[:verb] || "get")
+        verb      = (options[:verb] || "get")
         param_key = (verb == "get") ? :query : :body
-        resp = self.class.send( verb, url, {param_key => (options[param_key] || {}), :headers => base_headers, :debug_output => @debug})
+        resp      = self.class.send( verb, url, {param_key => (options[param_key] || {}), :headers => base_headers, :debug_output => @debug})
         if valid_response?(resp)
           @last_action = Time.now
           klass = Reddit.const_get(options[:handler] || "Submission")

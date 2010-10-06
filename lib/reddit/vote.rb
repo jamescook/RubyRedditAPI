@@ -22,8 +22,7 @@ module Reddit
     def vote(direction)
       return false unless logged_in?
       up_or_down = direction == :up ? 1 : -1
-      url        = self.send(:action_mapping)["vote"]["path"]
-      resp = self.class.post( url, {:body => {:id => submission.id, :dir => up_or_down, :uh => modhash}, :headers => base_headers})
+      resp = self.class.post( "/api/vote", {:body => {:id => submission.id, :dir => up_or_down, :uh => modhash}, :headers => base_headers})
       if resp.code == 200
         return true
       else

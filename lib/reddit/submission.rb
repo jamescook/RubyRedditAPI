@@ -1,23 +1,22 @@
 module Reddit
   class Submission < Api
-    attr_reader :domain, :media_embed, :subreddit, :selftext_html, :selftext, :likes, :saved, :clicked, :author, :media, :score, :over_18, :hidden, :thumbnail, :subreddit_id, :downs, :is_self, :permalink, :name, :created, :url, :title, :created_utc, :num_comments, :ups, :kind, :last_comment_id
+    attr_reader :domain, :media_embed, :subreddit, :selftext_html, :selftext, :likes, :saved, :clicked, :media, :score, :over_18, :hidden, :thumbnail, :subreddit_id, :downs, :is_self, :permalink, :name, :created, :url, :title, :created_utc, :num_comments, :ups, :kind, :last_comment_id
 
     def initialize(data)
-      json = data
-      parse(json)
+      parse(data)
       @debug    = StringIO.new
     end
 
     def inspect
-      "<Reddit::Submission id='#{id}' author='#{author}' title='#{title}'>"
+      "<Reddit::Submission id='#{id}' author='#{@author}' title='#{title}'>"
     end
 
     def id
       "#{kind}_#{@id}"
     end
 
-    def reload
-      #TODO
+    def author
+      @author_data ||= read("/user/#{@author}/about.json", :handler => "User")
     end
 
     def add_comment(text)
@@ -89,23 +88,6 @@ module Reddit
     end
 
     class << self
-=begin
-# Damn you captcha!!
-      def post_link(options)
-        submit(options.merge(:kind => "url"))
-      end
-
-      def post_text(options)
-        submit(options.merge(:kind => "self"))
-      end
-
-      def submit(options={})
-        raise "You must send :subreddit" unless options.key? :subreddit
-        api_options = options.merge(:uh => modhash, :sr => options[:subreddit], :kind => options[:kind])
-        resp = self.post("/api/submit", {:body => options, :headers => base_headers})
-        resp.code == 200
-      end
-=end
 
       def parse(json)
         submissions = []

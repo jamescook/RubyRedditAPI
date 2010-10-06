@@ -80,6 +80,7 @@ module Reddit
 
     def add_distinction(verb)
       resp=self.class.post("/api/distinguish/#{verb}", {:body => {:id => id, :uh => modhash, :r => subreddit, :executed => "distinguishing..."}, :headers => base_headers, :debug_output => @debug })
+      puts resp.headers
       resp.code == 200
     end
 
