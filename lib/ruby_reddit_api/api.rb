@@ -1,5 +1,6 @@
 module Reddit
 
+  # @author James Cook
   class Api < Base
     attr_reader :last_action, :debug
 
@@ -13,6 +14,9 @@ module Reddit
       "<Reddit::Api user='#{user}'>"
     end
 
+    # Browse submissions by subreddit
+    # @param [String] Subreddit to browse
+    # @return [Array<Reddit::Submission>]
     def browse(subreddit, options={})
       subreddit = sanitize_subreddit(subreddit)
       options.merge! :handler => "Submission"
@@ -22,18 +26,26 @@ module Reddit
       read("/r/#{subreddit}.json", options )
     end
 
+    # Read sent messages
+    # @return [Array<Reddit::Message>]
     def sent_messages
       messages :sent
     end
 
+    # Read received messages
+    # @return [Array<Reddit::Message>]
     def received_messages
       messages :inbox
     end
 
+    # Read received comments
+    # @return [Array<Reddit::Message>]
     def comments
       messages :comments
     end
 
+    # Read post replies
+    # @return [Array<Reddit::Message>]
     def post_replies
       messages :selfreply
     end

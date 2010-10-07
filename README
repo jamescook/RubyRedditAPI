@@ -1,6 +1,6 @@
-Ruby Reddit Client v0.1.9
+Ruby Reddit Client v0.2.0
 ==================
-Tested with 1.9.2
+Tested with ruby 1.9.2
 
 Usage:
 =======
@@ -12,9 +12,10 @@ Usage:
 Features:
 ========
 - Authentication
-- Parse submissions
-- Comments parsing
-- Vote on submission
+- Browse submissions
+- Read comments
+- Friend/unfriend redditors
+- Comment & submission voting
 
 
 Running Tests:

@@ -1,3 +1,4 @@
+#@author James Cook
 module Reddit
   module JsonListing
     def self.included(base)
@@ -6,6 +7,9 @@ module Reddit
     end
 
     module ClassMethods
+
+      # @param [Hash] JSON received from Reddit
+      # @return [Array<Reddit::Submission, Reddit::User, Reddit::Comment, Reddit::Message>]
       def parse(json)
         results = []
         if json.is_a?(Array)
@@ -28,10 +32,14 @@ module Reddit
       end
     end
     module InstanceMethods
+      # Iterate over JSON and set instance variables that map to each JSON key
+      # @param [Hash] JSON received from Reddit
+      # @return [true]
       def parse(json)
         json.keys.each do |key|
           instance_variable_set("@#{key}", json[key])
         end
+        true
       end
     end
   end

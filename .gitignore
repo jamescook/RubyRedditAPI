@@ -2,3 +2,5 @@
 *.swp
 *.swm
 *.sw0
+*.rvmrc
+*.yardoc

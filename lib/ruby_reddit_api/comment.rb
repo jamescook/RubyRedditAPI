@@ -1,5 +1,7 @@
 module Reddit
-  class Comment < Api
+  # @author James Cook
+  class Comment < Thing
+
     include JsonListing
     attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :replies, :subreddit, :ups, :debug, :kind
     def initialize(json)
@@ -11,33 +13,34 @@ module Reddit
       "<Reddit::Comment author='#{@author}' body='#{short_body}'>"
     end
 
-    def id
-      "#{kind}_#{@id}"
-    end
-
-    def author
-      @author_data ||= read("/user/#{@author}/about.json", :handler => "User")
-    end
-
+    # @return [String]
     def to_s
       body
     end
 
+    # Modify a comment
+    # @return [true,false]
     def edit(newtext)
       resp=self.class.post("/api/editusertext", {:body => {:thing_id => id, :uh => modhash, :r => subreddit, :text => newtext }, :headers => base_headers, :debug_output => @debug })
       resp.code == 200
     end
 
-    def hide # soft delete?
+    # Hide a comment
+    # @return [true,false]
+    def hide
       resp=self.class.post("/api/del", {:body => {:id => id, :uh => modhash, :r => subreddit, :executed => "removed" }, :headers => base_headers, :debug_output => @debug })
       resp.code == 200
     end
 
+    # Remove a comment
+    # @return [true,false]
     def remove
       resp=self.class.post("/api/remove", {:body => {:id => id, :uh => modhash, :r => subreddit}, :headers => base_headers, :debug_output => @debug })
       resp.code == 200
     end
 
+    # Approve a comment
+    # @return [true,false]
     def approve
       resp=self.class.post("/api/approve", {:body => {:id => id, :uh => modhash, :r => subreddit}, :headers => base_headers, :debug_output => @debug })
       resp.code == 200
@@ -55,19 +58,15 @@ module Reddit
       add_distinction "no"
     end
 
+    # Reply to another comment
+    # @return [true,false]
     def reply(text)
       resp = self.class.post("/api/comment", {:body => {:thing_id => id, :text => text, :uh => modhash, :r => subreddit }, :headers => base_headers, :debug_output => @debug })
       resp.code == 200
     end
 
-    def upvote
-      Vote.new(self).up
-    end
-
-    def downvote
-      Vote.new(self).down
-    end
-
+    # Trimmed comment body suitable for #inspect
+    # @return [String]
     def short_body
       str = body.to_s
       if str.size > 15

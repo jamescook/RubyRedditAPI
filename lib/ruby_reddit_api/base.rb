@@ -1,4 +1,7 @@
 module Reddit
+  # Base module all other classes descend from. Stores the cookie, modhash and user info for many API calls. Handles authentication and directs JSON
+  # to the relevant handler.
+  # @author James Cook
   class Base
     include HTTParty
 
@@ -10,47 +13,66 @@ module Reddit
       @debug    = StringIO.new
     end
 
+    # @return [String]
     def inspect
       "<Reddit::Base user='#{user}'>"
     end
 
+    # Login to Reddit and capture the cookie
+    # @return [Boolean] Login success or failure
     def login
       capture_session(self.class.post( "/api/login", {:body => {:user => @user, :passwd => @password}, :debug_output => @debug} ) )
       logged_in?
     end
 
+    # Remove the cookie to effectively logout of Reddit
+    # @return [nil]
     def logout
       Reddit::Base.instance_variable_set("@cookie",nil)
     end
 
+    # @return [String, nil]
     def cookie
       Reddit::Base.cookie
     end
 
+    # A kind of authenticity token for many API calls
+    # @return [String, nil]
     def modhash
       Reddit::Base.modhash
     end
 
+    # Reddit's displayed ID for the logged in user
+    # @return [String]
     def user_id
       Reddit::Base.user_id
     end
 
+    # Logged in user
+    # @return [String]
     def user
       Reddit::Base.user
     end
 
+    # The session is authenticated if the captured cookie shows a valid session is in place
+    # @return [true,false]
     def logged_in?
       !!(cookie && (cookie =~ /reddit_session/) != nil)
     end
 
+    # @return String
     def user_agent
       self.class.user_agent
     end
 
+    # HTTP headers to be sent in all API requests. At a minimum, 'User-agent' and 'Cookie' are needed.
+    # @return Hash
     def base_headers
       self.class.base_headers
     end
 
+    # Base communication function for nearly all API calls
+    # @return [Reddit::Submission, Reddit::Comment, Reddit::User, false] Various reddit-related, json parseable objects
     def read(url, options={})
       unless throttled?
         @debug.rewind

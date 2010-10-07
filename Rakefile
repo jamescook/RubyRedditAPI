@@ -8,11 +8,15 @@ Cucumber::Rake::Task.new do |t|
 end
 
 task :build do
-    system "gem build .gemspec"
+  system "gem build .gemspec"
 end
 
 task :release => :build do
-    system "gem push ruby_reddit_api-#{Reddit::VERSION}.gem"
+  system "gem push ruby_reddit_api-#{Reddit::VERSION}.gem"
+end
+
+task :doc do
+  system "yard doc"
 end
 
 task :default => [:cucumber]

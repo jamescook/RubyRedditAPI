@@ -1,3 +1,4 @@
+# @author James Cook
 module Reddit
   class Vote < Base
     attr_reader :submission
@@ -6,14 +7,19 @@ module Reddit
       @submission = submission
     end
 
+    # Upvote submission or comment
+    # @return [true,false]
     def up
       vote(:up)
     end
 
+    # Downvote submission or comment
+    # @return [true,false]
     def down
       vote(:down)
     end
 
+    #@return [String]
     def inspect
       "<Reddit::Vote>"
     end
