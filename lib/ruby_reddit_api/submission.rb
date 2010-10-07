@@ -55,21 +55,10 @@ module Reddit
     # Fetch submission comments
     # @todo Move to 'Thing' class
     # @return [Array<Reddit::Comment>]
-    def comments(more=false)
-      #TODO Get morechildren to work correctly
-      if more && last_comment_id
-        opts = {:handler => "Comment",
-                :verb => "post",
-                :body =>
-                  {:link_id => last_comment_id, :depth => 0, :r => subreddit, :uh => modhash, :renderstyle => "json", :pv_hex => "", :id => id}
-                }
-        return read("/api/morechildren", opts )
-
-      else
-        _comments = read( permalink + ".json", {:handler => "Comment", :query => {:limit => 50}} )
-        @last_comment_id = _comments.last.id if _comments && _comments.any?
-        return _comments
-      end
+    def comments
+      _comments = read( permalink + ".json", {:handler => "Comment", :query => {:limit => 250}} )
+      @last_comment_id = _comments.last.id if _comments && _comments.any?
+      return _comments
     end
 
     protected

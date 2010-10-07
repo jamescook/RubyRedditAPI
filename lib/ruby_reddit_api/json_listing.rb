@@ -20,7 +20,7 @@ module Reddit
           data     = json["data"]
           Reddit::Base.instance_variable_set("@modhash", data["modhash"]) # Needed for api calls
 
-          children = data["children"]
+          children = data["children"] || [{"data" => data, "kind" => json["kind"] }]
           children.each do |message|
             kind     = message["kind"]
             message["data"]["kind"] = kind

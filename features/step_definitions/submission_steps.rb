@@ -53,11 +53,6 @@ Then /^I should be able to downvote it$/ do
   @submission.downvote.should be true
 end
 
-Then /^I should be able to see the comments$/ do
-  comments = @submission.comments
-  comments.size.should > 0
-end
-
 Then /^I should not be able to save the submission$/ do
   @submission.save.should be false
 end
@@ -114,4 +109,9 @@ end
 
 Then /^I should be able to indistinguish the submission$/ do
   @submission.indistinguish
+end
+
+Then /^I should be able to see the comments$/ do
+  comments = @submission.comments
+  comments.size.should > 0
 end

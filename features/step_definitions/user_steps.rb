@@ -1,6 +1,8 @@
 Before do
   load_server_config
+  Reddit::Base.base_uri @address
   Reddit::Api.base_uri @address
+  Reddit::Thing.base_uri @address
   Reddit::Submission.base_uri @address
   Reddit::Comment.base_uri @address
   Reddit::User.base_uri @address

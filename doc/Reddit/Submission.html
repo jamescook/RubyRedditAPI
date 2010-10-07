@@ -866,7 +866,7 @@ Add a comment to a submission.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#comments-instance_method" title="#comments (instance method)">- (Array&lt;Reddit::Comment&gt;) <strong>comments</strong>(more = false) </a>
+      <a href="#comments-instance_method" title="#comments (instance method)">- (Array&lt;Reddit::Comment&gt;) <strong>comments</strong> </a>
     
 
     
@@ -2295,7 +2295,7 @@ text
       <div class="method_details ">
   <p class="signature " id="comments-instance_method">
   
-    - (<tt>Array&lt;<span class='object_link'><a href="Comment.html" title="Reddit::Comment (class)">Reddit::Comment</a></span>&gt;</tt>) <strong>comments</strong>(more = false) 
+    - (<tt>Array&lt;<span class='object_link'><a href="Comment.html" title="Reddit::Comment (class)">Reddit::Comment</a></span>&gt;</tt>) <strong>comments</strong> 
   
 
   
@@ -2342,37 +2342,15 @@ Fetch submission comments
 59
 60
 61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73</pre>
+62</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/submission.rb', line 58</span>
 
-<span class='kw'>def</span> <span class='id comments'>comments</span><span class='lparen'>(</span><span class='id more'>more</span><span class='op'>=</span><span class='kw'>false</span><span class='rparen'>)</span>
-  <span class='comment'>#TODO Get morechildren to work correctly
-</span>  <span class='kw'>if</span> <span class='id more'>more</span> <span class='op'>&amp;&amp;</span> <span class='id last_comment_id'>last_comment_id</span>
-    <span class='id opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:handler</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Comment</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-            <span class='symbol'>:verb</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>post</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-            <span class='symbol'>:body</span> <span class='op'>=&gt;</span>
-              <span class='lbrace'>{</span><span class='symbol'>:link_id</span> <span class='op'>=&gt;</span> <span class='id last_comment_id'>last_comment_id</span><span class='comma'>,</span> <span class='symbol'>:depth</span> <span class='op'>=&gt;</span> <span class='int'>0</span><span class='comma'>,</span> <span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id subreddit'>subreddit</span><span class='comma'>,</span> <span class='symbol'>:uh</span> <span class='op'>=&gt;</span> <span class='id modhash'>modhash</span><span class='comma'>,</span> <span class='symbol'>:renderstyle</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>json</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:pv_hex</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='rbrace'>}</span>
-            <span class='rbrace'>}</span>
-    <span class='kw'>return</span> <span class='id read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/morechildren</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id opts'>opts</span> <span class='rparen'>)</span>
-
-  <span class='kw'>else</span>
-    <span class='id _comments'>_comments</span> <span class='op'>=</span> <span class='id read'>read</span><span class='lparen'>(</span> <span class='id permalink'>permalink</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.json</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:handler</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Comment</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:query</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:limit</span> <span class='op'>=&gt;</span> <span class='int'>50</span><span class='rbrace'>}</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
-    <span class='ivar'>@last_comment_id</span> <span class='op'>=</span> <span class='id _comments'>_comments</span><span class='period'>.</span><span class='id last'>last</span><span class='period'>.</span><span class='id id'>id</span> <span class='kw'>if</span> <span class='id _comments'>_comments</span> <span class='op'>&amp;&amp;</span> <span class='id _comments'>_comments</span><span class='period'>.</span><span class='id any?'>any?</span>
-    <span class='kw'>return</span> <span class='id _comments'>_comments</span>
-  <span class='kw'>end</span>
+<span class='kw'>def</span> <span class='id comments'>comments</span>
+  <span class='id _comments'>_comments</span> <span class='op'>=</span> <span class='id read'>read</span><span class='lparen'>(</span> <span class='id permalink'>permalink</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.json</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:handler</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Comment</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:query</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:limit</span> <span class='op'>=&gt;</span> <span class='int'>250</span><span class='rbrace'>}</span><span class='rbrace'>}</span> <span class='rparen'>)</span>
+  <span class='ivar'>@last_comment_id</span> <span class='op'>=</span> <span class='id _comments'>_comments</span><span class='period'>.</span><span class='id last'>last</span><span class='period'>.</span><span class='id id'>id</span> <span class='kw'>if</span> <span class='id _comments'>_comments</span> <span class='op'>&amp;&amp;</span> <span class='id _comments'>_comments</span><span class='period'>.</span><span class='id any?'>any?</span>
+  <span class='kw'>return</span> <span class='id _comments'>_comments</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2676,7 +2654,7 @@ Unsave submission
 </div>
     
     <div id="footer">
-  Generated on Wed Oct  6 22:21:28 2010 by 
+  Generated on Wed Oct  6 23:21:40 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.1 (ruby-1.9.2).
 </div>

@@ -3,7 +3,7 @@ module Reddit
   class Comment < Thing
 
     include JsonListing
-    attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :replies, :subreddit, :ups, :debug, :kind
+    attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :num_comments, :subreddit, :ups, :debug, :kind
     def initialize(json)
       parse(json)
       @debug = StringIO.new
@@ -16,6 +16,17 @@ module Reddit
     # @return [String]
     def to_s
       body
+    end
+
+    # Fetch comments
+    # @return [Array<Reddit::Comment>]
+    def comments
+      opts = {:handler => "Comment",
+              :verb => "post",
+              :body =>
+                {:link_id => id, :depth => 10, :r => subreddit, :uh => modhash, :renderstyle => "json", :pv_hex => "", :id => id}
+              }
+      return read("/api/morechildren", opts )
     end
 
     # Modify a comment

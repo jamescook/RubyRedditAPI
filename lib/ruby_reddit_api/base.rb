@@ -103,7 +103,7 @@ module Reddit
 
     def capture_user_id
       return true if user_id
-      this_user = read("/user/#{user}/about.json", :handler => "User")
+      this_user = read("/user/#{user}/about.json", :handler => "User")[0]
       Reddit::Base.instance_variable_set("@user_id", this_user.id)
     end
 

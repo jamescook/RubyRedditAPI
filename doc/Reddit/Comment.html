@@ -430,6 +430,33 @@ Returns the value of attribute name.
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#num_comments-instance_method" title="#num_comments (instance method)">- (Object) <strong>num_comments</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the value of attribute num_comments.
+</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#parent_id-instance_method" title="#parent_id (instance method)">- (Object) <strong>parent_id</strong> </a>
     
 
@@ -448,33 +475,6 @@ Returns the value of attribute name.
   
     <span class="summary_desc"><div class='inline'><p>
 Returns the value of attribute parent_id.
-</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#replies-instance_method" title="#replies (instance method)">- (Object) <strong>replies</strong> </a>
-    
-
-    
-  </span>
-  
-  
-    <span class="note title readonly">readonly</span>
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'><p>
-Returns the value of attribute replies.
 </p>
 </div></span>
   
@@ -633,6 +633,30 @@ Returns the value of attribute ups.
   
     <span class="summary_desc"><div class='inline'><p>
 Approve a comment.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#comments-instance_method" title="#comments (instance method)">- (Array&lt;Reddit::Comment&gt;) <strong>comments</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Fetch comments.
 </p>
 </div></span>
   
@@ -1416,6 +1440,48 @@ Returns the value of attribute name
     
       
       <span id=""></span>
+      <span id="num_comments-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="num_comments-instance_method">
+  
+    - (<tt>Object</tt>) <strong>num_comments</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the value of attribute num_comments
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='id num_comments'>num_comments</span>
+  <span class='ivar'>@num_comments</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
       <span id="parent_id-instance_method"></span>
       <div class="method_details ">
   <p class="signature " id="parent_id-instance_method">
@@ -1450,48 +1516,6 @@ Returns the value of attribute parent_id
 
 <span class='kw'>def</span> <span class='id parent_id'>parent_id</span>
   <span class='ivar'>@parent_id</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <span id="replies-instance_method"></span>
-      <div class="method_details ">
-  <p class="signature " id="replies-instance_method">
-  
-    - (<tt>Object</tt>) <strong>replies</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Returns the value of attribute replies
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-6
-7
-8</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 6</span>
-
-<span class='kw'>def</span> <span class='id replies'>replies</span>
-  <span class='ivar'>@replies</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1644,14 +1668,14 @@ Returns the value of attribute ups
       <pre class="lines">
 
 
-79
-80
-81
-82
-83</pre>
+90
+91
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id add_distinction'>add_distinction</span><span class='lparen'>(</span><span class='id verb'>verb</span><span class='rparen'>)</span>
   <span class='id resp'>resp</span><span class='op'>=</span><span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id post'>post</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/distinguish/</span><span class='embexpr_beg'>#{</span><span class='id verb'>verb</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:body</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:uh</span> <span class='op'>=&gt;</span> <span class='id modhash'>modhash</span><span class='comma'>,</span> <span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id subreddit'>subreddit</span><span class='comma'>,</span> <span class='symbol'>:executed</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>distinguishing...</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='symbol'>:headers</span> <span class='op'>=&gt;</span> <span class='id base_headers'>base_headers</span><span class='comma'>,</span> <span class='symbol'>:debug_output</span> <span class='op'>=&gt;</span> <span class='ivar'>@debug</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1676,12 +1700,12 @@ Returns the value of attribute ups
       <pre class="lines">
 
 
-53
-54
-55</pre>
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id admin_distinguish'>admin_distinguish</span>
   <span class='id add_distinction'>add_distinction</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
@@ -1728,17 +1752,79 @@ Approve a comment
       <pre class="lines">
 
 
-44
-45
-46
-47</pre>
+55
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id approve'>approve</span>
   <span class='id resp'>resp</span><span class='op'>=</span><span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id post'>post</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/approve</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:body</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:uh</span> <span class='op'>=&gt;</span> <span class='id modhash'>modhash</span><span class='comma'>,</span> <span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id subreddit'>subreddit</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='symbol'>:headers</span> <span class='op'>=&gt;</span> <span class='id base_headers'>base_headers</span><span class='comma'>,</span> <span class='symbol'>:debug_output</span> <span class='op'>=&gt;</span> <span class='ivar'>@debug</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id resp'>resp</span><span class='period'>.</span><span class='id code'>code</span> <span class='op'>==</span> <span class='int'>200</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="comments-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="" title="Reddit::Comment (class)">Reddit::Comment</a></span>&gt;</tt>) <strong>comments</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Fetch comments
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="" title="Reddit::Comment (class)">Reddit::Comment</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id comments'>comments</span>
+  <span class='id opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:handler</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Comment</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+          <span class='symbol'>:verb</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>post</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+          <span class='symbol'>:body</span> <span class='op'>=&gt;</span>
+            <span class='lbrace'>{</span><span class='symbol'>:link_id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:depth</span> <span class='op'>=&gt;</span> <span class='int'>10</span><span class='comma'>,</span> <span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id subreddit'>subreddit</span><span class='comma'>,</span> <span class='symbol'>:uh</span> <span class='op'>=&gt;</span> <span class='id modhash'>modhash</span><span class='comma'>,</span> <span class='symbol'>:renderstyle</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>json</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:pv_hex</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='rbrace'>}</span>
+          <span class='rbrace'>}</span>
+  <span class='kw'>return</span> <span class='id read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/morechildren</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id opts'>opts</span> <span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1782,13 +1868,13 @@ Modify a comment
       <pre class="lines">
 
 
-23
-24
-25
-26</pre>
+34
+35
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id edit'>edit</span><span class='lparen'>(</span><span class='id newtext'>newtext</span><span class='rparen'>)</span>
   <span class='id resp'>resp</span><span class='op'>=</span><span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id post'>post</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/editusertext</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:body</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:thing_id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:uh</span> <span class='op'>=&gt;</span> <span class='id modhash'>modhash</span><span class='comma'>,</span> <span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id subreddit'>subreddit</span><span class='comma'>,</span> <span class='symbol'>:text</span> <span class='op'>=&gt;</span> <span class='id newtext'>newtext</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='symbol'>:headers</span> <span class='op'>=&gt;</span> <span class='id base_headers'>base_headers</span><span class='comma'>,</span> <span class='symbol'>:debug_output</span> <span class='op'>=&gt;</span> <span class='ivar'>@debug</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1836,13 +1922,13 @@ Hide a comment
       <pre class="lines">
 
 
-30
-31
-32
-33</pre>
+41
+42
+43
+44</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id hide'>hide</span>
   <span class='id resp'>resp</span><span class='op'>=</span><span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id post'>post</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/del</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:body</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:uh</span> <span class='op'>=&gt;</span> <span class='id modhash'>modhash</span><span class='comma'>,</span> <span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id subreddit'>subreddit</span><span class='comma'>,</span> <span class='symbol'>:executed</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>removed</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='symbol'>:headers</span> <span class='op'>=&gt;</span> <span class='id base_headers'>base_headers</span><span class='comma'>,</span> <span class='symbol'>:debug_output</span> <span class='op'>=&gt;</span> <span class='ivar'>@debug</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1866,12 +1952,12 @@ Hide a comment
       <pre class="lines">
 
 
-57
-58
-59</pre>
+68
+69
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id indistinguish'>indistinguish</span>
   <span class='id add_distinction'>add_distinction</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>no</span><span class='tstring_end'>&quot;</span></span>
@@ -1922,12 +2008,12 @@ Hide a comment
       <pre class="lines">
 
 
-49
-50
-51</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id moderator_distinguish'>moderator_distinguish</span>
   <span class='id add_distinction'>add_distinction</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>yes</span><span class='tstring_end'>&quot;</span></span>
@@ -1974,13 +2060,13 @@ Remove a comment
       <pre class="lines">
 
 
-37
-38
-39
-40</pre>
+48
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id remove'>remove</span>
   <span class='id resp'>resp</span><span class='op'>=</span><span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id post'>post</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/remove</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:body</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:uh</span> <span class='op'>=&gt;</span> <span class='id modhash'>modhash</span><span class='comma'>,</span> <span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id subreddit'>subreddit</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='symbol'>:headers</span> <span class='op'>=&gt;</span> <span class='id base_headers'>base_headers</span><span class='comma'>,</span> <span class='symbol'>:debug_output</span> <span class='op'>=&gt;</span> <span class='ivar'>@debug</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -2028,13 +2114,13 @@ Reply to another comment
       <pre class="lines">
 
 
-63
-64
-65
-66</pre>
+74
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id reply'>reply</span><span class='lparen'>(</span><span class='id text'>text</span><span class='rparen'>)</span>
   <span class='id resp'>resp</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id class'>class</span><span class='period'>.</span><span class='id post'>post</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/api/comment</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='symbol'>:body</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:thing_id</span> <span class='op'>=&gt;</span> <span class='id id'>id</span><span class='comma'>,</span> <span class='symbol'>:text</span> <span class='op'>=&gt;</span> <span class='id text'>text</span><span class='comma'>,</span> <span class='symbol'>:uh</span> <span class='op'>=&gt;</span> <span class='id modhash'>modhash</span><span class='comma'>,</span> <span class='symbol'>:r</span> <span class='op'>=&gt;</span> <span class='id subreddit'>subreddit</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='symbol'>:headers</span> <span class='op'>=&gt;</span> <span class='id base_headers'>base_headers</span><span class='comma'>,</span> <span class='symbol'>:debug_output</span> <span class='op'>=&gt;</span> <span class='ivar'>@debug</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -2082,17 +2168,17 @@ Trimmed comment body suitable for #inspect
       <pre class="lines">
 
 
-70
-71
-72
-73
-74
-75
-76
-77</pre>
+81
+82
+83
+84
+85
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/comment.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id short_body'>short_body</span>
   <span class='id str'>str</span> <span class='op'>=</span> <span class='id body'>body</span><span class='period'>.</span><span class='id to_s'>to_s</span>
@@ -2161,7 +2247,7 @@ Trimmed comment body suitable for #inspect
 </div>
     
     <div id="footer">
-  Generated on Wed Oct  6 22:21:27 2010 by 
+  Generated on Wed Oct  6 23:21:40 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.1 (ruby-1.9.2).
 </div>

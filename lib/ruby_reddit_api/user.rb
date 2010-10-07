@@ -1,7 +1,7 @@
 module Reddit
   # @author James Cook
   class User < Api
-    include JSONListing
+    include JsonListing
     attr_reader :name, :debug, :created, :created_utc, :link_karma, :comment_karma, :is_mod, :has_mod_mail, :kind
     def initialize(json)
       @debug = StringIO.new
