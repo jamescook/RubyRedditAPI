@@ -1,5 +1,5 @@
 == Ruby Reddit Client v0.2.2
-Tested with ruby 1.9.2
+Tested with ruby 1.8.7 & 1.9.2
 
 == Usage
   require "ruby_reddit_api"

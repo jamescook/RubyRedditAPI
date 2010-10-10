@@ -7,7 +7,7 @@ module Reddit
 
     attr_reader :last_action, :debug
     base_uri "www.reddit.com"
-    class << self; attr_reader :cookie, :modhash, :user_id, :user, end
+    class << self; attr_reader :cookie, :modhash, :user_id, :user end
 
     def initialize(options={})
       @debug    = StringIO.new

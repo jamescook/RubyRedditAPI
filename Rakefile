@@ -1,4 +1,4 @@
-$:.unshift(File.dirname(__FILE__) + '/../../lib')
+$:.unshift(File.dirname(__FILE__) + '/lib')
 require 'cucumber/rake/task'
 require "bundler/version"
 require "ruby_reddit_api/version"
