@@ -21,8 +21,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency "httparty"
   s.add_development_dependency "cucumber"
+  s.add_development_dependency "rcov"
 
-  s.files        = Dir.glob("{lib}/**/*") + %w(README)
+  s.files        = Dir.glob("{lib}/**/*") + %w(README.rdoc)
   s.test_files   = Dir.glob("{features}/**/*")
   s.require_path = 'lib'
 end

@@ -5,6 +5,9 @@ require "ruby_reddit_api/version"
 
 Cucumber::Rake::Task.new do |t|
   t.cucumber_opts = %w{--format pretty}
+  t.rcov = true
+  t.rcov_opts = %w{ --exclude gems\/,spec\/,features\/ --comments}
+  t.rcov_opts << %[-o "coverage"]
 end
 
 task :build do
