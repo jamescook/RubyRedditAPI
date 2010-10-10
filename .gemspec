@@ -13,9 +13,11 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/jamescook/RubyRedditAPI"
   s.summary     = "Wrapper for reddit API"
   s.description = "Wraps many reddit API functions such as submission and comments browsing, voting, messaging, friending, and more."
-  s.has_rdoc    = false
+  s.has_rdoc    = 'yard'
+  s.rubyforge_project = 'ruby_reddit_api'
 
   s.required_rubygems_version = ">= 1.3.6"
+  s.required_ruby_version = ">= 1.8.7"
 
   s.add_dependency "httparty"
   s.add_development_dependency "cucumber"

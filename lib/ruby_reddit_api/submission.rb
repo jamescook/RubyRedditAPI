@@ -58,6 +58,7 @@ module Reddit
     def comments
       _comments = read( permalink + ".json", {:handler => "Comment", :query => {:limit => 250}} )
       @last_comment_id = _comments.last.id if _comments && _comments.any?
+      _comments.shift # First 'comment' is actually the submission
       return _comments
     end
 

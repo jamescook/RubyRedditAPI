@@ -15,7 +15,7 @@ module Reddit
 
     # @return [String]
     def inspect
-      "<Reddit::Base user='#{user}'>"
+      "<Reddit::Base>"
     end
 
     # Login to Reddit and capture the cookie

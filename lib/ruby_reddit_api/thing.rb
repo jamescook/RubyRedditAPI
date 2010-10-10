@@ -17,7 +17,8 @@ module Reddit
     # The author of the entity. The data is lazy-loaded and cached on the object
     # @return [Reddit::User]
     def author
-      @author_data ||= read("/user/#{@author}/about.json", :handler => "User")[0]
+      response = read("/user/#{@author}/about.json", :handler => "User") if @author
+      @author_data ||= response[0] if response
     end
 
     # Upvote thing

@@ -415,13 +415,15 @@ The author of the entity. The data is lazy-loaded and cached on the object
 
 19
 20
-21</pre>
+21
+22</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id author'>author</span>
-  <span class='ivar'>@author_data</span> <span class='op'>||=</span> <span class='id read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/user/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@author</span><span class='rbrace'>}</span><span class='tstring_content'>/about.json</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:handler</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='id response'>response</span> <span class='op'>=</span> <span class='id read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/user/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@author</span><span class='rbrace'>}</span><span class='tstring_content'>/about.json</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:handler</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>User</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@author</span>
+  <span class='ivar'>@author_data</span> <span class='op'>||=</span> <span class='id response'>response</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='kw'>if</span> <span class='id response'>response</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -465,12 +467,12 @@ Downvote thing
       <pre class="lines">
 
 
-31
 32
-33</pre>
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 32</span>
 
 <span class='kw'>def</span> <span class='id downvote'>downvote</span>
   <span class='const'>Reddit</span><span class='op'>::</span><span class='const'>Vote</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id down'>down</span>
@@ -569,12 +571,12 @@ Report thing
       <pre class="lines">
 
 
-37
 38
-39</pre>
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id report'>report</span>
   <span class='id toggle'>toggle</span> <span class='symbol'>:report</span>
@@ -597,16 +599,16 @@ Report thing
       <pre class="lines">
 
 
-41
 42
 43
 44
 45
 46
-47</pre>
+47
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 42</span>
 
 <span class='kw'>def</span> <span class='id toggle'>toggle</span><span class='lparen'>(</span><span class='id which'>which</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='id logged_in?'>logged_in?</span>
@@ -657,12 +659,12 @@ Upvote thing
       <pre class="lines">
 
 
-25
 26
-27</pre>
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/ruby_reddit_api/thing.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='id upvote'>upvote</span>
   <span class='const'>Reddit</span><span class='op'>::</span><span class='const'>Vote</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id up'>up</span>
@@ -677,7 +679,7 @@ Upvote thing
 </div>
     
     <div id="footer">
-  Generated on Sun Oct 10 01:18:34 2010 by 
+  Generated on Sun Oct 10 12:38:46 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.1 (ruby-1.9.2).
 </div>

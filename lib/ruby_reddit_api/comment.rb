@@ -95,10 +95,12 @@ module Reddit
     def short_body
       str = body.to_s.strip
       if str.size > 15
-        str[0..15] + "..."
+        sb = str[0..15] + "..."
       else
-        body
+        sb = body
       end
+
+      sb.gsub(/[\n\r]/,'\n')
     end
 
     def add_distinction(verb)

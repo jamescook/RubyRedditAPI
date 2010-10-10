@@ -41,26 +41,24 @@
     
     <iframe id="search_frame"></iframe>
     
-    <div id="content"><div id='filecontents'><p>
-Ruby Reddit Client v0.2.1
-</p>
-<h6>Tested with ruby 1.9.2</h6>
+    <div id="content"><div id='filecontents'><h2>Ruby Reddit Client v0.2.2</h2>
 <p>
-Usage:
+Tested with ruby 1.8.7 &amp; 1.9.2
 </p>
-<h6>> require &#8220;ruby_reddit_api&#8220;</h6>
-<p>
-> r = Reddit::Api.new &#8220;user&#8221;, &#8220;password&#8221; > results
-= r.browse &#8220;ruby&#8221; > results[0].upvote
-</p>
+<h2>Usage</h2>
 <pre class="code">
+  <span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby_reddit_api</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id r'>r</span> <span class='op'>=</span> <span class='const'>Reddit</span><span class='op'>::</span><span class='const'>Api</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>password</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id results'>results</span> <span class='op'>=</span> <span class='id r'>r</span><span class='period'>.</span><span class='id browse'>browse</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ruby</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id results'>results</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id upvote'>upvote</span>
  
 </pre>
-<p>
-Features:
-</p>
-<h6>- Authentication</h6>
+<h2>Features</h2>
 <ul>
+<li><p>
+Authentication
+</p>
+</li>
 <li><p>
 Browse submissions
 </p>
@@ -78,11 +76,13 @@ Comment &amp; submission voting
 </p>
 </li>
 </ul>
-<p>
-Running Tests:
+<h2>Running Tests</h2>
+<ol>
+<li><p>
+Set up the reddit VM (<a
+href="http://blog.reddit.com/2010/05/admins-never-do-what-you-want-now-it-is.html">blog.reddit.com/2010/05/admins-never-do-what-you-want-now-it-is.html</a>)
 </p>
-<h6>- Set up the reddit VM (<a href="http://blog.reddit.com/2010/05/admins-never-do-what-you-want-now-it-is.html">blog.reddit.com/2010/05/admins-never-do-what-you-want-now-it-is.html</a>)</h6>
-<ul>
+</li>
 <li><p>
 Ensure your hosts file has reddit.local pointing to the VM
 </p>
@@ -91,39 +91,15 @@ Ensure your hosts file has reddit.local pointing to the VM
 rake cucumber
 </p>
 </li>
-</ul>
+</ol>
+<h2>License</h2>
 <p>
-License (The MIT License)
+Ruby Reddit API is released under the MIT License.
 </p>
-<p>
-Copyright &#169; 2010 James Cook
-</p>
-<p>
-Permission is hereby granted, free of charge, to any person obtaining a
-copy
-</p>
-<pre class="code">
- of this software and associated documentation files (the &quot;Software&quot;), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- THE SOFTWARE.
-</pre>
 </div></div>
     
     <div id="footer">
-  Generated on Sun Oct 10 01:18:34 2010 by 
+  Generated on Sun Oct 10 12:38:46 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.1 (ruby-1.9.2).
 </div>

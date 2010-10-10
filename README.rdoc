@@ -1,4 +1,4 @@
-== Ruby Reddit Client v0.2.2
+== Ruby Reddit Client v0.2.3
 Tested with ruby 1.8.7 & 1.9.2
 
 == Usage
@@ -9,9 +9,10 @@ Tested with ruby 1.8.7 & 1.9.2
  
 == Features
 * Authentication
-* Browse submissions
-* Read comments
-* Friend/unfriend redditors
+* Browse subreddits
+* Searching
+* Read & reply to comments
+* Friend & unfriend redditors
 * Comment & submission voting
 
 
