@@ -3,14 +3,28 @@ module Reddit
   class Comment < Thing
 
     include JsonListing
-    attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :num_comments, :subreddit, :ups, :debug, :kind
-    def initialize(json)
-      parse(json)
+    attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :num_comments, :subreddit, :ups, :debug, :kind, :replies
+    def initialize(json, options={})
+      mode = options.fetch(:mode){ :json }
+      if mode == :json
+        parse(json)
+      end
+
+      if mode == :replies
+        json.keys.each do |key|
+          instance_variable_set("@#{key}", json[key])
+        end
+      end
+
+      if replies.is_a?(Hash)
+        handle_replies(replies)
+      end
+
       @debug = StringIO.new
     end
 
     def inspect
-      "<Reddit::Comment author='#{@author}' body='#{short_body}'>"
+      "<Reddit::Comment author='#{@author}' body='#{short_body}' replies='#{replies.size}' ups='#{ups}' downs='#{downs}'>"
     end
 
     # @return [String]
@@ -79,7 +93,7 @@ module Reddit
     # Trimmed comment body suitable for #inspect
     # @return [String]
     def short_body
-      str = body.to_s
+      str = body.to_s.strip
       if str.size > 15
         str[0..15] + "..."
       else
@@ -89,8 +103,20 @@ module Reddit
 
     def add_distinction(verb)
       resp=self.class.post("/api/distinguish/#{verb}", {:body => {:id => id, :uh => modhash, :r => subreddit, :executed => "distinguishing..."}, :headers => base_headers, :debug_output => @debug })
-      puts resp.headers
       resp.code == 200
+    end
+
+    # Parse nested comment hashes into a Comment
+    # @param  [Hash] JSON containing reply data
+    # @return [true]
+    def handle_replies(data)
+       dup = data.dup
+       _kind, data       = dup["kind"],     dup["data"]
+       modhash, children = data["modhash"], data["children"]
+       if children.is_a?(Array)
+         @replies = children.map{|reply| Comment.new(reply["data"], :mode => :replies) }
+       end
+       true
     end
   end
 end

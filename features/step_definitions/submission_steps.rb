@@ -112,6 +112,7 @@ Then /^I should be able to indistinguish the submission$/ do
 end
 
 Then /^I should be able to see the comments$/ do
+  @submission.instance_variable_set("@last_action", Time.now - 60) if @submission
   comments = @submission.comments
   comments.size.should > 0
 end
