@@ -19,7 +19,9 @@ Tested with ruby 1.8.7 & 1.9.2
 == Running Tests
 1. Set up the reddit VM (http://blog.reddit.com/2010/05/admins-never-do-what-you-want-now-it-is.html)
 2. Ensure your hosts file has reddit.local pointing to the VM
-3. rake cucumber
+3. gem install bundler
+4. bundle install
+5. rake
 
 == License
 Ruby Reddit API is released under the MIT License.
