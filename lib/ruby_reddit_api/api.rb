@@ -61,6 +61,12 @@ module Reddit
       messages :inbox
     end
 
+    #Read unread messages
+    # @return [Array<Reddit::Message>]
+    def unread_messages
+      messages :unread
+    end
+
     # Read received comments
     # @return [Array<Reddit::Message>]
     def comments
