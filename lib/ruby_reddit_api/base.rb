@@ -7,7 +7,9 @@ module Reddit
 
     attr_reader :last_action, :debug
     base_uri "www.reddit.com"
-    class << self; attr_reader :cookie, :modhash, :user_id, :user end
+    class << self; attr_reader :cookie, :modhash, :user_id, :user, :throttle_duration end
+
+    @throttle_duration = 1.0
 
     def initialize(options={})
       @debug    = StringIO.new
@@ -108,7 +110,7 @@ module Reddit
     end
 
     def throttled?
-      @last_action && ( ( Time.now - @last_action ) < 1.0 )
+      @last_action && ( ( Time.now - @last_action ) < Reddit::Base.throttle_duration )
     end
 
     def sanitize_subreddit(subreddit)

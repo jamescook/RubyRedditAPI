@@ -1,8 +1,9 @@
 module Reddit
   # @author James Cook
   class Comment < Thing
-
+    include Voteable
     include JsonListing
+
     attr_reader :body, :subreddit_id, :name, :created, :downs, :author, :created_utc, :body_html, :link_id, :parent_id, :likes, :num_comments, :subreddit, :ups, :debug, :kind, :replies
     def initialize(json, options={})
       mode = options.fetch(:mode){ :json }

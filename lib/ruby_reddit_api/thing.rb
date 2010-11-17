@@ -21,18 +21,6 @@ module Reddit
       @author_data ||= response[0] if response
     end
 
-    # Upvote thing
-    # @return [true,false]
-    def upvote
-      Reddit::Vote.new(self).up
-    end
-
-    # Downvote thing
-    # @return [true,false]
-    def downvote
-      Reddit::Vote.new(self).down
-    end
-
     # Report thing
     # @return [true,false]
     def report

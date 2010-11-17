@@ -1,5 +1,4 @@
 Given /^I search '([^']+)' with '([^']+)'$/ do |subreddit, terms|
-  # FIXME searching isnt working for me by default in the reddit vm
   Reddit::Base.base_uri "reddit.com"
   Reddit::Api.base_uri "reddit.com"
   @api       = Reddit::Api.new

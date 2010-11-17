@@ -2,6 +2,8 @@
 module Reddit
   class Submission < Thing
     include JsonListing
+    include Voteable
+
     attr_reader :domain, :media_embed, :subreddit, :selftext_html, :selftext, :likes, :saved, :clicked, :media, :score, :over_18, :hidden, :thumbnail, :subreddit_id, :downs, :is_self, :permalink, :name, :created, :url, :title, :created_utc, :num_comments, :ups, :kind, :last_comment_id
 
     def inspect
