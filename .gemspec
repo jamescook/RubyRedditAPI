@@ -2,7 +2,7 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
-require "reddit/version"
+require "ruby_reddit_api/version"
 
 Gem::Specification.new do |s|
   s.name        = "ruby_reddit_api"
