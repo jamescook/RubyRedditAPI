@@ -11,7 +11,7 @@ Cucumber::Rake::Task.new do |t|
 end
 
 task :build do
-  system "gem build .gemspec"
+  system "gem build ruby_reddit_api.gemspec"
 end
 
 task :release => :build do
