@@ -15,6 +15,14 @@ module Reddit
       "#{kind}_#{@id}"
     end
 
+    def unread?
+      @new == true
+    end
+
+    def read?
+      @new == false
+    end
+
     # The author of the message. The data is lazy-loaded and cached on the message
     # @return [Reddit::User]
     def author

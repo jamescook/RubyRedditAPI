@@ -1,4 +1,4 @@
-== Ruby Reddit Client v0.2.5
+== Ruby Reddit Client v0.2.6
 Tested with ruby 1.8.7 & 1.9.2
 
 == Usage

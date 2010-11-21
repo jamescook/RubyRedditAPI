@@ -16,4 +16,5 @@ require "ruby_reddit_api/vote"
 require "ruby_reddit_api/submission"
 require "ruby_reddit_api/comment"
 require "ruby_reddit_api/message"
+require "ruby_reddit_api/message_group"
 
