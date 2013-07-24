@@ -1,0 +1,1 @@
+{"content-type"=>["application/json; charset=UTF-8"], "content-length"=>["224"], "set-cookie"=>["reddit_session=really-long-string; Domain=reddit.com; Path=/; HttpOnly"], "server"=>["'; DROP TABLE servertypes; --"], "date"=>["Sat, 20 Jul 2013 01:30:10 GMT"], "connection"=>["keep-alive"]}

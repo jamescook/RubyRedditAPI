@@ -79,7 +79,8 @@ module Reddit
       messages :selfreply
     end
 
-    protected
+    private
+
     def messages(kind)
       read("/message/#{kind.to_s}.json", :handler => "Message")
     end

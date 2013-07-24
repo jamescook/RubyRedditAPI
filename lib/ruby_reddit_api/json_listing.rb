@@ -31,6 +31,7 @@ module Reddit
         return results.flatten
       end
     end
+
     module InstanceMethods
       # Iterate over JSON and set instance variables that map to each JSON key
       # @param [Hash] JSON received from Reddit
